@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import logo from "./logo.svg";
+import "./App.css";
+import Navbar from "./components/Navbar";
+import Bio from "./components/Bio";
+
+// use default theme
+// const theme = createTheme();
+
+// Or Create your Own theme:
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#3B4252",
+    },
+    secondary: {
+      main: "#81A1C1",
+    },
+  },
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="Hobby App">
+      <ThemeProvider theme={theme}>
+        <Navbar />
+        <Bio />
+      </ThemeProvider>
     </div>
   );
 }
