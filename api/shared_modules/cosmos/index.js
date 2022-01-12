@@ -25,9 +25,32 @@ class CosmosDB {
     getUserById = async(id) => {
         const querySpec = {
             query: `SELECT * from c where c.id = @id`,
-            parameters: [{name: `@id`, value: id}]
+            parameters: [{name: `@id`, value: id.toString()}]
         };
         const { resources: items } = await this.usersContainer.items
+            .query(querySpec)
+            .fetchAll();
+        
+        return items[0];
+    }
+
+    getPosts = async() => {
+        const querySpec = {
+            query: `SELECT * from c`
+        };
+        const { resources: items } = await this.postsContainer.items
+            .query(querySpec)
+            .fetchAll();
+
+        return items;
+    };
+
+    getPostById = async(id) => {
+        const querySpec = {
+            query: `SELECT * from c where c.id = @id`,
+            parameters: [{name: `@id`, value: id.toString()}]
+        };
+        const { resources: items } = await this.postsContainer.items
             .query(querySpec)
             .fetchAll();
         
